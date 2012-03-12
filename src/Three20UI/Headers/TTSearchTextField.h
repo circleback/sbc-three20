@@ -37,6 +37,7 @@
   BOOL _searchesAutomatically;
   BOOL _showsDoneButton;
   BOOL _showsDarkScreen;
+  BOOL _disablesScrollOnlyWhenShowingSearchResults;
 
   id<TTTableViewDataSource> _dataSource;
 }
@@ -48,6 +49,7 @@
 @property (nonatomic)           BOOL searchesAutomatically;
 @property (nonatomic)           BOOL showsDoneButton;
 @property (nonatomic)           BOOL showsDarkScreen;
+@property (nonatomic)           BOOL disablesScrollOnlyWhenShowingSearchResults;
 
 @property (nonatomic, retain)   id<TTTableViewDataSource> dataSource;
 

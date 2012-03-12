@@ -55,6 +55,8 @@ static const CGFloat kDesiredTableHeight = 150.0f;
 @synthesize showsDoneButton       = _showsDoneButton;
 @synthesize showsDarkScreen       = _showsDarkScreen;
 @synthesize dataSource            = _dataSource;
+@synthesize disablesScrollOnlyWhenShowingSearchResults
+    = _disablesScrollOnlyWhenShowingSearchResults;
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -67,6 +69,7 @@ static const CGFloat kDesiredTableHeight = 150.0f;
     self.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     self.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.searchesAutomatically = YES;
+	self.disablesScrollOnlyWhenShowingSearchResults = NO;
 
     [self addTarget:self action:@selector(didBeginEditing)
       forControlEvents:UIControlEventEditingDidBegin];
@@ -318,9 +321,11 @@ static const CGFloat kDesiredTableHeight = 150.0f;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)didBeginEditing {
   if (_dataSource) {
-    UIScrollView* scrollView = (UIScrollView*)[self ancestorOrSelfWithClass:[UIScrollView class]];
-    scrollView.scrollEnabled = NO;
-    scrollView.scrollsToTop = NO;
+	if (! _disablesScrollOnlyWhenShowingSearchResults) {
+		UIScrollView* scrollView = (UIScrollView*)[self ancestorOrSelfWithClass:[UIScrollView class]];
+		scrollView.scrollEnabled = NO;
+		scrollView.scrollsToTop = NO;
+	}
 
     if (_showsDoneButton) {
       [self showDoneButton:YES];
@@ -338,9 +343,11 @@ static const CGFloat kDesiredTableHeight = 150.0f;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)didEndEditing {
   if (_dataSource) {
-    UIScrollView* scrollView = (UIScrollView*)[self ancestorOrSelfWithClass:[UIScrollView class]];
-    scrollView.scrollEnabled = YES;
-    scrollView.scrollsToTop = YES;
+	if (! _disablesScrollOnlyWhenShowingSearchResults) {
+		UIScrollView* scrollView = (UIScrollView*)[self ancestorOrSelfWithClass:[UIScrollView class]];
+		scrollView.scrollEnabled = YES;
+		scrollView.scrollsToTop = YES;
+	}
 
     [self showSearchResults:NO];
 
@@ -421,6 +428,12 @@ static const CGFloat kDesiredTableHeight = 150.0f;
   if (show && _dataSource) {
     [self tableView];
 
+	if (_disablesScrollOnlyWhenShowingSearchResults) {
+		UIScrollView* scrollView = (UIScrollView*)[self ancestorOrSelfWithClass:[UIScrollView class]];
+		scrollView.scrollEnabled = NO;
+		scrollView.scrollsToTop = NO;
+	}
+
     if (!_shadowView) {
       _shadowView = [[TTView alloc] init];
       _shadowView.style = TTSTYLE(searchTableShadow);
@@ -444,7 +457,13 @@ static const CGFloat kDesiredTableHeight = 150.0f;
     [_tableView deselectRowAtIndexPath:_tableView.indexPathForSelectedRow animated:NO];
 
   } else {
-    [_tableView removeFromSuperview];
+	if (_disablesScrollOnlyWhenShowingSearchResults) {
+		UIScrollView* scrollView = (UIScrollView*)[self ancestorOrSelfWithClass:[UIScrollView class]];
+		scrollView.scrollEnabled = YES;
+		scrollView.scrollsToTop = YES;
+	}
+
+	[_tableView removeFromSuperview];
     [_shadowView removeFromSuperview];
   }
 }
