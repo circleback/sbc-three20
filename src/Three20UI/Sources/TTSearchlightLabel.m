@@ -137,7 +137,7 @@
   if (_textAlignment == UITextAlignmentRight) {
     x = self.frame.size.width - textSize.width;
 
-  } else if (_textAlignment == UITextAlignmentCenter) {
+  } else if (_textAlignment == NSTextAlignmentCenter) {
     x = ceil(self.frame.size.width/2 - textSize.width/2);
   }
 

@@ -48,7 +48,7 @@
   if (self) {
     _shadowOffset = CGSizeZero;
     _numberOfLines = 1;
-    _textAlignment = UITextAlignmentCenter;
+    _textAlignment = NSTextAlignmentCenter;
     _verticalAlignment = UIControlContentVerticalAlignmentCenter;
     _lineBreakMode = UILineBreakModeTailTruncation;
   }
@@ -201,7 +201,7 @@
 
     rect.size = textSize;
 
-    if (_textAlignment == UITextAlignmentCenter) {
+    if (_textAlignment == NSTextAlignmentCenter) {
       rect.origin.x = round(size.width/2 - textSize.width/2);
 
     } else if (_textAlignment == UITextAlignmentRight) {

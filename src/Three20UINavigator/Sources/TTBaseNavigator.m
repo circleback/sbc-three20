@@ -312,8 +312,7 @@ __attribute__((weak_import));
   controller.modalTransitionStyle = transition;
 
   if ([controller isKindOfClass:[UINavigationController class]]) {
-    [parentController presentModalViewController: controller
-                                        animated: animated];
+      [parentController presentViewController:controller animated:animated completion:nil];
 
   } else {
     UINavigationController* navController = [[[[self navigationControllerClass] alloc] init]
@@ -322,8 +321,7 @@ __attribute__((weak_import));
     navController.modalPresentationStyle = controller.modalPresentationStyle;
     [navController pushViewController: controller
                              animated: NO];
-    [parentController presentModalViewController: navController
-                                        animated: animated];
+    [parentController presentViewController:controller animated:animated completion:nil];
   }
 }
 
