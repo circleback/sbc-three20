@@ -50,7 +50,7 @@
     _numberOfLines = 1;
     _textAlignment = NSTextAlignmentCenter;
     _verticalAlignment = UIControlContentVerticalAlignmentCenter;
-    _lineBreakMode = UILineBreakModeTailTruncation;
+    _lineBreakMode = NSLineBreakByTruncatingTail;
   }
 
   return self;
@@ -100,7 +100,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 + (TTTextStyle*)styleWithFont:(UIFont*)font color:(UIColor*)color
-                textAlignment:(UITextAlignment)textAlignment next:(TTStyle*)next {
+                textAlignment:(NSTextAlignment)textAlignment next:(TTStyle*)next {
   TTTextStyle* style = [[[self alloc] initWithNext:next] autorelease];
   style.font = font;
   style.color = color;
@@ -141,9 +141,9 @@
 + (TTTextStyle*)styleWithFont:(UIFont*)font color:(UIColor*)color
               minimumFontSize:(CGFloat)minimumFontSize
                   shadowColor:(UIColor*)shadowColor shadowOffset:(CGSize)shadowOffset
-                textAlignment:(UITextAlignment)textAlignment
+                textAlignment:(NSTextAlignment)textAlignment
             verticalAlignment:(UIControlContentVerticalAlignment)verticalAlignment
-                lineBreakMode:(UILineBreakMode)lineBreakMode numberOfLines:(NSInteger)numberOfLines
+                lineBreakMode:(NSLineBreakMode)lineBreakMode numberOfLines:(NSInteger)numberOfLines
                          next:(TTStyle*)next {
   TTTextStyle* style = [[[self alloc] initWithNext:next] autorelease];
   style.font = font;
@@ -188,7 +188,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (CGRect)rectForText:(NSString*)text forSize:(CGSize)size withFont:(UIFont*)font {
   CGRect rect = CGRectZero;
-  if (_textAlignment == UITextAlignmentLeft
+  if (_textAlignment == NSTextAlignmentLeft
       && _verticalAlignment == UIControlContentVerticalAlignmentTop) {
     rect.size = size;
 
@@ -204,7 +204,7 @@
     if (_textAlignment == NSTextAlignmentCenter) {
       rect.origin.x = round(size.width/2 - textSize.width/2);
 
-    } else if (_textAlignment == UITextAlignmentRight) {
+    } else if (_textAlignment == NSTextAlignmentRight) {
       rect.origin.x = size.width - textSize.width;
     }
 

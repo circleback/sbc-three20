@@ -33,7 +33,7 @@
 #import "Three20Style/TTGlobalStyle.h"
 
 static const CGFloat kMaxLabelHeight = 2000.0f;
-static const UILineBreakMode kLineBreakMode = UILineBreakModeWordWrap;
+static const NSLineBreakMode kLineBreakMode = NSLineBreakByWordWrapping;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -137,7 +137,7 @@ static const UILineBreakMode kLineBreakMode = UILineBreakModeWordWrap;
     } else if ([object isKindOfClass:[TTTableLink class]]) {
       self.textLabel.font = TTSTYLEVAR(tableFont);
       self.textLabel.textColor = TTSTYLEVAR(linkTextColor);
-      self.textLabel.textAlignment = UITextAlignmentLeft;
+      self.textLabel.textAlignment = NSTextAlignmentLeft;
 
     } else if ([object isKindOfClass:[TTTableSummaryItem class]]) {
       self.textLabel.font = TTSTYLEVAR(tableSummaryFont);
@@ -147,17 +147,17 @@ static const UILineBreakMode kLineBreakMode = UILineBreakModeWordWrap;
     } else if ([object isKindOfClass:[TTTableLongTextItem class]]) {
       self.textLabel.font = TTSTYLEVAR(font);
       self.textLabel.textColor = TTSTYLEVAR(textColor);
-      self.textLabel.textAlignment = UITextAlignmentLeft;
+      self.textLabel.textAlignment = NSTextAlignmentLeft;
 
     } else if ([object isKindOfClass:[TTTableGrayTextItem class]]) {
       self.textLabel.font = TTSTYLEVAR(font);
       self.textLabel.textColor = TTSTYLEVAR(tableSubTextColor);
-      self.textLabel.textAlignment = UITextAlignmentLeft;
+      self.textLabel.textAlignment = NSTextAlignmentLeft;
 
     } else {
       self.textLabel.font = TTSTYLEVAR(tableFont);
       self.textLabel.textColor = TTSTYLEVAR(textColor);
-      self.textLabel.textAlignment = UITextAlignmentLeft;
+      self.textLabel.textAlignment = NSTextAlignmentLeft;
     }
   }
 }
