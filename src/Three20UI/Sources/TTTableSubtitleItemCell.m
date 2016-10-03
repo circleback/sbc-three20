@@ -82,7 +82,9 @@
 
   CGFloat height = TTSTYLEVAR(tableFont).ttLineHeight + kTableCellVPadding*2;
   if (item.subtitle) {
-    height += TTSTYLEVAR(font).ttLineHeight;
+     // height += TTSTYLEVAR(font).ttLineHeight;
+      UIFont *tFont = TTSTYLEVAR(font);
+      height += tFont.ttLineHeight;
   }
 
   return height;
